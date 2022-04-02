@@ -89,4 +89,135 @@
         color: inherit;
         border: none;
     }
+
+    .container-sm-3:not(#col-1 > div)
+    {
+        border: 1px solid #AED6F1;
+        margin-top: 10%;
+    }
+
+    #img-center
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 5vh;
+        height: 5vh;
+    }
+
+    .btn-all-brushes
+    {
+        border: none;
+        background-color: #EBF5FB;
+        margin-top: 2vh;
+    }
+
+    .brushes-in-menu
+    {
+        width: 7vh;
+    }
+
+    .dropdown-menu 
+    {
+        min-width: 10px;
+        margin-left: 5%;
+        background-color: #EBF5FB;
+    }
+
+    .btn-bruhes
+    {
+        background: none;
+        color: inherit;
+        border: none;
+    }
+
+
+
+
+
+
+    .container-sm-4:not(#col-1 > div)
+    {
+        border: 1px solid #AED6F1;
+        margin-top: 10%;
+    }
+
+    #img-center
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 5vh;
+        height: 5vh;
+    }
+
+    .btn-all-sizes
+    {
+        border: none;
+        background-color: #EBF5FB;
+        margin-top: 2vh;
+    }
+
+    .sizes-in-menu
+    {
+        width: 7vh;
+    }
+
+    .dropdown-menu 
+    {
+        min-width: 10px;
+        margin-left: 5%;
+        background-color: #EBF5FB;
+    }
+
+    .btn-sizes
+    {
+        background: none;
+        color: inherit;
+        border: none;
+    }
+
+
+    .container-sm-5:not(#col-1 > div)
+    {
+        border: 1px solid #AED6F1;
+        margin-top: 10%;
+    }
+
+    #img-center
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 5vh;
+        height: 5vh;
+    }
+
+    .btn-all-colors
+    {
+        border: none;
+        background-color: #EBF5FB;
+        margin-top: 2vh;
+    }
+
+    .colors-in-menu
+    {
+        width: 7vh;
+    }
+
+    .dropdown-menu 
+    {
+        min-width: 10px;
+        margin-left: 5%;
+        background-color: #EBF5FB;
+    }
+
+    .btn-colors
+    {
+        background: none;
+        color: inherit;
+        border: none;
+    }
+
+
 }
