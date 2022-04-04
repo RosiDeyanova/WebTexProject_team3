@@ -1,0 +1,7 @@
+-removed light blue borders
+-removed row div
+-moved undo and redo to more dropdown menu
+-code cleanup (removed thing from the css that didnt change anything, and whitespaces from html)
+-made dropdown buttons use the same style class
+-changed header and brd display to flex
+-added canvas
