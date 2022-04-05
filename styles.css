@@ -8,11 +8,11 @@
 
         #canvas
         {
-            margin-top: 10vh;
-            width: 300px;
-            height: 300px;
+            margin-top: 1vh;
+            /*width: 100vw;
+            height: 300px;*/
             box-shadow: 3px 6px 6px 5px #000000b6;
-            background-color: white;
+            /*background-color: white;*/
         }
 
         .canvas-holder
@@ -209,10 +209,17 @@
             margin-left: 4px;
             display: inline;
         }
-        
+
         .color-box:hover
         {
             border: 2px solid #AED6F1;
+        }
+
+        .color-picker {
+            min-width: 8vw;
+            max-width: 8vw;
+            min-height: 8vw;
+            max-height: 8vw;
         }
     
         #black
@@ -265,14 +272,14 @@
             background-color: darkblue;
         }
     
-        #light-blue
+        #blue
         {
             background-color: blue;
         }
     
         #green
         {
-            background-color: green;
+            background-color: #008000;
         }
     }
 
@@ -286,9 +293,9 @@
 
         #canvas
         {
-            margin-top: 10vh;
-            width: 300px;
-            height: 300px;
+            margin-top: 1vw;
+            /*width: 300px;
+            height: 300px;*/
             box-shadow: 3px 6px 6px 5px #000000b6;
             background-color: white;
         }
@@ -487,6 +494,13 @@
             margin-left: 4px;
             display: inline;
         }
+
+        .color-picker {
+            min-width: 3vw;
+            max-width: 3vw;
+            min-height: 3vw;
+            max-height: 3vw;
+        }
         
         .color-box:hover
         {
@@ -500,12 +514,12 @@
     
         #gray
         {
-            background-color: gray;
+            background-color: #808080;
         }
     
         #dark-red
         {
-            background-color: darkred;
+            background-color: #8b0000;
         }
     
         #red
@@ -515,12 +529,12 @@
     
         #orange
         {
-            background-color: orange;
+            background-color: #ffa500;
         }
     
         #yellow
         {
-            background-color: yellow;
+            background-color: #ffff00;
         }
     
         #empty
@@ -535,15 +549,15 @@
     
         #purple
         {
-            background-color: purple;
+            background-color: #800080;
         }
     
         #dark-blue
         {
-            background-color: darkblue;
+            background-color: #00008b;
         }
     
-        #light-blue
+        #blue
         {
             background-color: blue;
         }

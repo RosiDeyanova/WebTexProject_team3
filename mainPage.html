@@ -12,6 +12,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="styles.css">
+        <script src="drawing logic.js"  defer type="module"></script>
 
         <title>Paint</title>
 
@@ -106,6 +107,8 @@
                     </button>
     
                     <ul class="dropdown-menu menu">
+
+                        <input type="range" min="1" max="100" class="brush-size" id="brush-size">
     
                         <li class="sizes-in-menu">
                             <button class="btn-sizes">
@@ -166,10 +169,13 @@
         
                             <li class="color-box" id="dark-blue"></li>
         
-                            <li class="color-box" id="light-blue"></li>
-        
+                            <li class="color-box" id="blue"></li>
+
                             <li class="color-box" id="green"></li>
+                            <br><br>
+                            <input type="color" class="color-picker" id="color-picker">
                         </ul>
+                        
                     </div>   
             </div>
 
@@ -189,7 +195,7 @@
 
                     <ul class="dropdown-menu dots-menu">
                         <li class="tools-in-menu">
-                            <button class="btn-tools items-more">
+                            <button class="btn-tools items-more" id="undo-btn">
                                 Undo
                             </button>
                         </li>
@@ -213,7 +219,7 @@
                         </li>
         
                         <li class="tools-in-menu">
-                            <button class="btn-tools items-more">
+                            <button class="btn-tools items-more" id="clear-btn">
                             New
                             </button> 
                         </li>
