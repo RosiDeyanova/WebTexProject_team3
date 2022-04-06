@@ -65,7 +65,7 @@ basicGrayColor.onclick = function () {
 }
 const basicDarkRedColor = document.getElementById("dark-red")
 basicDarkRedColor.onclick = function () {
-    changeColor("dark-red")
+    changeColor("#8B0000")
     colorPicker.value = "#8B0000"
 }
 const basicRedColor = document.getElementById("red")
@@ -95,7 +95,7 @@ basicPurpleColor.onclick = function () {
 }
 const basicDarkBlueColor = document.getElementById("dark-blue")
 basicDarkBlueColor.onclick = function () {
-    changeColor("dark-blue")
+    changeColor("#00008b")
     colorPicker.value = "#00008B"
 }
 const basicBlueColor = document.getElementById("blue")
@@ -165,7 +165,7 @@ desktopPurpleColor.onclick = function () {
 }
 const desktopDarkRedColor = document.getElementById("desktop-dark-red")
 desktopDarkRedColor.onclick = function () {
-    changeColor("dark-red")
+    changeColor("#8B0000")
     colorPickerDesktop.value = "#8B0000"
 }
 const desktopGreenColor = document.getElementById("desktop-green")
@@ -175,7 +175,7 @@ desktopGreenColor.onclick = function () {
 }
 const desktopDarkBlueColor = document.getElementById("desktop-dark-blue")
 desktopDarkBlueColor.onclick = function () {
-    changeColor("dark-blue")
+    changeColor("#00008b")
     colorPickerDesktop.value = "#00008B"
 }
 
