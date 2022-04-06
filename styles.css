@@ -22,6 +22,12 @@
             align-items: center;
         }
 
+        .only-desktop
+        {
+            visibility: hidden;
+            display: none;
+        }
+
         #container-header
         {
             width:100%;
@@ -51,8 +57,10 @@
         .circle
         {
             margin-top: 2vw;
-            width: 8vw;
-            height: 8vw;
+            max-width: 8vw;
+            max-height: 8vw;
+            min-width: 8vw;
+            min-height: 8vw;
             border-radius: 100%;
             background-color: #f3e140;
             display: flex;
@@ -65,8 +73,10 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 7vw;
-            height: 7vw;
+            max-width: 7vw;
+            max-height: 7vw;
+            min-width: 7vw;
+            min-height: 7vw;
         }
     
         .btn-tools
@@ -288,37 +298,68 @@
     {
         body
         {
-            background-color: rgb(147, 154, 161);
+            background-color: #939aa1;
+        }
+
+        .three-btns
+        {
+            width: 20vw;
+            display: flex;
+            justify-content: space-between;
+            justify-items: space-between;
+            align-items: stretch;
+        }
+
+        .desktop-icons
+        {
+            width: 6vh;
+            height: 6vh;  
+            margin: auto; 
+        }
+
+        .only-mobile
+        {
+            visibility: hidden;
+            display: none;
         }
 
         #canvas
         {
-            margin-top: 1vw;
-            /*width: 300px;
-            height: 300px;*/
             box-shadow: 3px 6px 6px 5px #000000b6;
             background-color: white;
         }
 
         .canvas-holder
         {   
+            margin-top: 1vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
+        .slider-holder
+        {
+            width: 20vw;
+            height: 6vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 2vw;
+            padding-right: 2vw;
+        }
+
         #container-header
         {
             width: 100%;
-            height: 10vw;
+            height: 12vh;
             background-color: #F8F9F9;
             display: flex;
         }
     
         .brd
         {
-            width: 10vw;
-            height: 10vw;
+            min-height: 12vh;
+            max-height: 12vh;
             background-color: #EBF5FB;
             display: flex;
             flex-direction: column;
@@ -328,16 +369,14 @@
 
         .img-center
         {
-            width: 6vw;
-            height: 6vw;
-            margin-top: 2vw;
+            width: 6vh;
+            height: 6vh;
         }
-    
+
         .circle
         {
-            margin-top: 2vw;
-            min-width: 6vw;
-            min-height: 6vw;
+            min-width: 6vh;
+            min-height: 6vh;
             border-radius: 100%;
             background-color: #f3e140;
             display: flex;
@@ -350,8 +389,8 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 5vw;
-            height: 5vw;
+            width: 5vh;
+            height: 5vh;
         }
     
         .btn-tools
@@ -360,14 +399,6 @@
             color: inherit;
             border: none;
         }
-    
-        /*
-        .container-sm-3:not(#col-1 > div)
-        {
-            border: 1px solid #AED6F1;
-            margin-top: 10%;
-        }
-        */
     
         .btn-dropdown
         {
@@ -483,23 +514,36 @@
         {
             display: block;
         }
-    
+
+        .desktop-colors
+        {
+            width: 20vw;
+            height: 6vh;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+        
+        .color-palette
+        {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+
         .color-box
         {
-            border: 2px solid white;
-            padding: 11px;
-            margin: 7px;
-            padding-top: 0px;
-            padding-bottom: 8px;
-            margin-left: 4px;
-            display: inline;
+            border: 0.5vh solid #EBF5FB;
+            padding: 1.2vh;
+            
         }
 
         .color-picker {
-            min-width: 3vw;
-            max-width: 3vw;
-            min-height: 3vw;
-            max-height: 3vw;
+            margin-right: 2vh;
+            min-width: 5vh;
+            max-width: 5vh;
+            min-height: 5vh;
+            max-height: 5vh;
         }
         
         .color-box:hover
@@ -507,63 +551,78 @@
             border: 2px solid #AED6F1;
         }
     
-        #black
+        .black
         {
             background-color: black;
         }
     
-        #gray
+        .gray
         {
             background-color: #808080;
         }
     
-        #dark-red
+        .dark-red
         {
             background-color: #8b0000;
         }
     
-        #red
+        .red
         {
             background-color: red;
         }
     
-        #orange
+        .orange
         {
             background-color: #ffa500;
         }
     
-        #yellow
+        .yellow
         {
             background-color: #ffff00;
         }
     
-        #empty
+        .empty
         {
             border: none;
         }
     
-        #white
+        .white
         {
             background-color: white;
         }
     
-        #purple
+        .purple
         {
             background-color: #800080;
         }
     
-        #dark-blue
+        .dark-blue
         {
             background-color: #00008b;
         }
     
-        #blue
+        .blue
         {
             background-color: blue;
         }
     
-        #green
+        .green
         {
             background-color: green;
+        }
+
+        .lime
+        {
+            background-color: #00FF00;
+        }
+
+        .desktop-colors-section
+        {
+            width: 30vw;
+        }
+
+        .desktop-more-section
+        {
+            width: 10vw;
         }
     }

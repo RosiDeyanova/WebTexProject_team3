@@ -21,7 +21,16 @@
         <header id="container-header">
             <div class="col brd">
                 
-                <img class="img-center" src="https://cdn-icons-png.flaticon.com/512/1497/1497573.png"
+                <div class="three-btns only-desktop">
+                    <img class="desktop-icons" id="bucket-desktop" src="https://img.icons8.com/color/344/fill-color.png"
+                                alt="Bucket" width="1" height="60"> 
+                    <img class="desktop-icons" id="eraser-desktop" src="https://img.icons8.com/fluency/344/eraser-tool.png"
+                                alt="Eraser" width="1" height="60">
+                    <img class="desktop-icons" id="zoom-desktop" src="https://cdn-icons-png.flaticon.com/512/639/639375.png"
+                                alt="Magnifier" width="1" height="60">
+                </div>
+
+                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/1497/1497573.png"
                     alt="Tools" width="30" height="30"> 
 
                 <div class="dropdown">
@@ -30,11 +39,12 @@
                         Tools
                     </button>
 
-                    <ul class="dropdown-menu menu">
+
+                    <ul class="dropdown-menu menu only-mobile">
 
                         <li class="tools-in-menu">
                             <button class="btn-tools">
-                                <img class="img-center icons" src="https://img.icons8.com/color/344/fill-color.png"
+                                <img class="img-center icons" id="img-tools" src="https://img.icons8.com/color/344/fill-color.png"
                                 alt="Bucket" width="1" height="60"> 
                             </button>
                         </li>
@@ -58,7 +68,15 @@
             </div>
    
             <div class="col brd">
-                <img class="img-center" src="https://cdn-icons-png.flaticon.com/512/806/806647.png"
+                <div class="three-btns only-desktop">
+                    <img class="desktop-icons only-desktop" id="brush-desktop" src="https://cdn-icons-png.flaticon.com/512/595/595570.png"
+                                    alt="Paint brush">
+                    <img class="desktop-icons only-desktop" id="spray-desktop" src="https://cdn-icons-png.flaticon.com/512/3791/3791132.png"
+                                    alt="Spray brush">
+                    <img class="desktop-icons only-desktop" id="pencil-desktop" src="https://cdn-icons-png.flaticon.com/512/603/603570.png"
+                                alt="Pencil">
+                </div>
+                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/806/806647.png"
                 alt="Brushes tools" width="30" height="30">       
 
                 <div class="dropdown">
@@ -67,7 +85,7 @@
                         Brushes
                     </button>
 
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu only-mobile">
                     
                         <li class="brushes-in-menu"> 
                             <button class="btn-brushes btn-sizes">
@@ -97,7 +115,10 @@
 
             <div class="col brd">
 
-                <img class="img-center" src="https://cdn-icons-png.flaticon.com/512/764/764608.png"
+                <div class="slider-holder only-desktop">
+                    <input type="range" min="1" max="100" class="brush-size only-desktop" id="brush-size-desktop">
+                </div>
+                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/764/764608.png"
                 alt="Bucket" width="30" height="30">
 
                 <div class="dropdown">
@@ -107,39 +128,31 @@
                     </button>
     
                     <ul class="dropdown-menu menu">
-
                         <input type="range" min="1" max="100" class="brush-size" id="brush-size">
-    
-                        <li class="sizes-in-menu">
-                            <button class="btn-sizes">
-                                <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/1828/1828567.png"
-                                alt="Thin" width="1" height="60">
-                            </button>
-    
-                        </li>
-    
-                        <li class="sizes-in-menu">
-                            <button class="btn-sizes">
-                                <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/1828/1828905.png"
-                                alt="Medium" width="1" height="60">
-                            </button>
-                            
-                        </li>
-        
-                        <li class="sizes-in-menu">
-                            <button class="btn-sizes">
-                                <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/56/56889.png"
-                                alt="Dense" width="1" height="60">
-                            </button> 
-                        </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="col brd">
-
-                    <img class="img-center" src="https://cdn-icons-png.flaticon.com/512/1157/1157969.png"
-                    alt="Palette" width="30" height="30">
+            <div class="brd desktop-colors-section">
+                <div class="desktop-colors only-desktop">
+                    <input type="color" class="color-picker" id="color-picker-desktop">
+                    <div class="color-palette">
+                        <div class="color-box black" id="desktop-black"></div>
+                        <div class="color-box white" id="desktop-white"></div>
+                        <div class="color-box gray" id="desktop-gray"></div>
+                        <div class="color-box red" id="desktop-red"></div>
+                        <div class="color-box lime" id="desktop-lime"></div>
+                        <div class="color-box blue" id="desktop-blue"></div>
+                        <div class="color-box yellow" id="desktop-yellow"></div>
+                        <div class="color-box orange" id="desktop-orange"></div>
+                        <div class="color-box purple" id="desktop-purple"></div>
+                        <div class="color-box dark-red" id="desktop-dark-red"></div>
+                        <div class="color-box green" id="desktop-green"></div>
+                        <div class="color-box dark-blue" id="desktop-dark-blue"></div>
+                    </div>
+                </div>
+                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/1157/1157969.png"
+                alt="Palette" width="30" height="30">
 
                     <div class="dropdown">
 
@@ -147,7 +160,7 @@
                             Colors
                         </button>
         
-                        <ul class="dropdown-menu menu" id="dropdown-colors">
+                        <ul class="dropdown-menu menu only-mobile" id="dropdown-colors">
         
                             <li class="color-box" id="black"></li>
         
@@ -179,7 +192,7 @@
                     </div>   
             </div>
 
-            <div class="col brd">
+            <div class="brd desktop-more-section">
 
                 <div class="circle">
                     <img id="padding-dots" src="https://cdn-icons-png.flaticon.com/512/512/512142.png"
