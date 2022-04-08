@@ -1,106 +1,247 @@
 <!DOCTYPE html>
 <html lang=en>
-<head>
-<meta name ="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
+    <head>
+        <meta name ="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
 
-<!-- Bootstrap links -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <!-- Bootstrap links -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css">
+        <script src="drawing logic.js"  defer type="module"></script>
 
-<title>Paint</title>
+        <title>Paint</title>
 
-</head>
-<body>
-
-    <header id="container-header">
-
-    <div class="row">
-        <div class="col" id="col-1">
-            <div class="container-sm-2">
-
-                <div class="row">
-                    <div class="col padding-0">
-                        <div class="container-sm-6">
-                <button class="arrow"><img src="https://cdn-icons-png.flaticon.com/512/889/889631.png"
-                    alt="Undo" width="20" height="20"> </button> 
-                    </div></div>
-          
-                        <div class="col padding-0">
-                            <div class="container-sm-6">
-                <button class="arrow"><img src= https://cdn-icons-png.flaticon.com/512/889/889619.png
-                    alt="Redo" width="20" height="20"> </button>
-                    </div></div></div>
+    </head>
+    <body>
+        <header id="container-header">
+            <div class="col brd">
                 
-            </div>
-        </div>
+                <div class="three-btns only-desktop">
+                    <img class="desktop-icons" id="bucket-desktop" src="https://img.icons8.com/color/344/fill-color.png"
+                                alt="Bucket" width="1" height="60"> 
+                    <img class="desktop-icons" id="eraser-desktop" src="https://img.icons8.com/fluency/344/eraser-tool.png"
+                                alt="Eraser" width="1" height="60">
+                    <img class="desktop-icons" id="zoom-desktop" src="https://cdn-icons-png.flaticon.com/512/639/639375.png"
+                                alt="Magnifier" width="1" height="60">
+                </div>
 
-        <div class="col brd">
-            <div class="container-sm-2">
-                <img id="img-center" src="https://cdn-icons-png.flaticon.com/512/1497/1497573.png"
-                    alt="Undo" width="30" height="30"> 
-            </div>
+                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/1497/1497573.png"
+                    alt="Tools" width="30" height="30"> 
 
-               <div class="dropdown">
-            <button class="btn-all-tools dropdown-toggle" data-toggle="dropdown">
-                Tools
-            </button>
-
-            <ul class="dropdown-menu menu">
-                <li class="tools-in-menu">
-                    <button class="btn-tools">
-                        <img id="img-center" src="https://cdn-icons.flaticon.com/png/512/1959/premium/1959717.png?token=exp=1648810521~hmac=90ec89d164e2ed2a888c2767ea16e262"
-                        alt="Bucket" width="1" height="60"> 
+                <div class="dropdown">
+                    
+                    <button class="btn-dropdown" data-toggle="dropdown">
+                        Tools
                     </button>
-                </li>
 
-                <li class="tools-in-menu">
-                    <button class="btn-tools">
-                        <img id="img-center" src="https://cdn-icons.flaticon.com/png/512/2661/premium/2661282.png?token=exp=1648810783~hmac=3dc42c69aab142038747bc94db484084"
-                        alt="Bucket" width="1" height="60">
+
+                    <ul class="dropdown-menu menu only-mobile">
+
+                        <li class="tools-in-menu">
+                            <button class="btn-tools">
+                                <img class="img-center icons" id="img-tools" src="https://img.icons8.com/color/344/fill-color.png"
+                                alt="Bucket" width="1" height="60"> 
+                            </button>
+                        </li>
+        
+                        <li class="tools-in-menu">
+                            <button class="btn-tools">
+                                <img class="img-center icons" src="https://img.icons8.com/fluency/344/eraser-tool.png"
+                                alt="Rubber" width="1" height="60">
+                            </button>
+                        </li>
+        
+                        <li class="tools-in-menu">
+                            <button class="btn-tools">
+                                <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/639/639375.png"
+                                alt="Magnifier" width="1" height="60">
+                            </button> 
+                        </li>
+
+                    </ul>
+                </div>       
+            </div>
+   
+            <div class="col brd">
+                <div class="three-btns only-desktop">
+                    <img class="desktop-icons only-desktop" id="brush-desktop" src="https://cdn-icons-png.flaticon.com/512/595/595570.png"
+                                    alt="Paint brush">
+                    <img class="desktop-icons only-desktop" id="spray-desktop" src="https://cdn-icons-png.flaticon.com/512/3791/3791132.png"
+                                    alt="Spray brush">
+                    <img class="desktop-icons only-desktop" id="pencil-desktop" src="https://cdn-icons-png.flaticon.com/512/603/603570.png"
+                                alt="Pencil">
+                </div>
+                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/806/806647.png"
+                alt="Brushes tools" width="30" height="30">       
+
+                <div class="dropdown">
+                    
+                    <button class="btn-dropdown" data-toggle="dropdown">
+                        Brushes
                     </button>
-                </li>
 
-                <li class="tools-in-menu">
-                    <button class="btn-tools">
-                        <img id="img-center" src="https://cdn-icons-png.flaticon.com/512/639/639375.png"
-                        alt="Bucket" width="1" height="60">
-                    </button> 
-                </li>
-              </ul>
+                    <ul class="dropdown-menu only-mobile">
+                    
+                        <li class="brushes-in-menu"> 
+                            <button class="btn-brushes btn-sizes">
+                                <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/595/595570.png"
+                                alt="Paint brush" width="1" height="60">
+                            </button>
 
+                        </li>
+
+                        <li class="brushes-in-menu">
+                            <button class="btn-brushes btn-sizes">
+                                <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/3791/3791132.png"
+                                alt="Spray brush" width="1" height="60">
+                            </button>
+                            
+                        </li>
+        
+                        <li class="brushes-in-menu">
+                            <button class="btn-brushes btn-sizes">
+                                <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/603/603570.png"
+                                alt="Pencil" width="1" height="60">
+                            </button> 
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-        </div>
+            <div class="col brd">
 
-        <div class="col brd">
-            <div class="container-sm-2">
-                Column
+                <div class="slider-holder only-desktop">
+                    <input type="range" min="1" max="100" class="brush-size only-desktop" id="brush-size-desktop">
+                </div>
+                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/764/764608.png"
+                alt="Bucket" width="30" height="30">
+
+                <div class="dropdown">
+
+                    <button class="btn-dropdown" data-toggle="dropdown">
+                        Size
+                    </button>
+    
+                    <ul class="dropdown-menu menu">
+                        <input type="range" min="1" max="100" class="brush-size" id="brush-size">
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <div class="col brd">
-            <div class="container-sm-2">
-                 Column
+            <div class="brd desktop-colors-section">
+                <div class="desktop-colors only-desktop">
+                    <input type="color" class="color-picker" id="color-picker-desktop">
+                    <div class="color-palette">
+                        <div class="color-box black" id="desktop-black"></div>
+                        <div class="color-box white" id="desktop-white"></div>
+                        <div class="color-box gray" id="desktop-gray"></div>
+                        <div class="color-box red" id="desktop-red"></div>
+                        <div class="color-box lime" id="desktop-lime"></div>
+                        <div class="color-box blue" id="desktop-blue"></div>
+                        <div class="color-box yellow" id="desktop-yellow"></div>
+                        <div class="color-box orange" id="desktop-orange"></div>
+                        <div class="color-box purple" id="desktop-purple"></div>
+                        <div class="color-box dark-red" id="desktop-dark-red"></div>
+                        <div class="color-box green" id="desktop-green"></div>
+                        <div class="color-box dark-blue" id="desktop-dark-blue"></div>
+                    </div>
+                </div>
+                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/1157/1157969.png"
+                alt="Palette" width="30" height="30">
+
+                    <div class="dropdown">
+
+                        <button class="btn-dropdown" data-toggle="dropdown">
+                            Colors
+                        </button>
+        
+                        <ul class="dropdown-menu menu only-mobile" id="dropdown-colors">
+        
+                            <li class="color-box" id="black"></li>
+        
+                            <li class="color-box" id="gray"></li>
+        
+                            <li class="color-box" id="dark-red"></li>
+        
+                            <li class="color-box" id="red"></li>
+        
+                            <li class="color-box" id="orange"></li>
+        
+                            <li class="color-box" id="yellow"></li> <br><br>
+        
+                            <li class="color-box" id="empty"></li>
+        
+                            <li class="color-box" id="white"></li>
+        
+                            <li class="color-box" id="purple"></li>
+        
+                            <li class="color-box" id="dark-blue"></li>
+        
+                            <li class="color-box" id="blue"></li>
+
+                            <li class="color-box" id="green"></li>
+                            <br><br>
+                            <input type="color" class="color-picker" id="color-picker">
+                        </ul>
+                        
+                    </div>   
             </div>
-        </div>
 
-        <div class="col brd">
-            <div class="container-sm-2">
-                Column
-            </div>
-        </div>
+            <div class="brd desktop-more-section">
 
-        <div class="col brd">
-            <div class="container-sm-2">
-                Column
-            </div>
-        </div>
+                <div class="circle">
+                    <img id="padding-dots" src="https://cdn-icons-png.flaticon.com/512/512/512142.png"
+                    alt="Dots" width="30" height="30">
 
-    </header>
-</body>
+                </div>
+
+                <div class="dropdown">
+                    
+                    <button class="btn-dropdown" data-toggle="dropdown">
+                        More
+                    </button>
+
+                    <ul class="dropdown-menu dots-menu">
+                        <li class="tools-in-menu">
+                            <button class="btn-tools items-more" id="undo-btn">
+                                Undo
+                            </button>
+                        </li>
+
+                        <li class="tools-in-menu">
+                            <button class="btn-tools items-more">
+                                Redo
+                            </button>
+                        </li>
+
+                        <li class="tools-in-menu">
+                            <button class="btn-tools items-more">
+                                Upload
+                            </button>
+                        </li>
+        
+                        <li class="tools-in-menu">
+                            <button class="btn-tools items-more">
+                                Download
+                            </button>
+                        </li>
+        
+                        <li class="tools-in-menu">
+                            <button class="btn-tools items-more" id="clear-btn">
+                            New
+                            </button> 
+                        </li>
+                    </ul>
+                </div>
+        </header>
+        
+        <div class="canvas-holder">
+            <canvas id="canvas"></canvas>
+        </div>
+        
+    </body>
 </html>
