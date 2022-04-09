@@ -84,6 +84,7 @@
             background: none;
             color: inherit;
             border: none;
+            margin-left: 2vw;
         }
     
         /*
@@ -110,7 +111,7 @@
     
         .dropdown-menu 
         {
-            min-width: 10px;
+            min-width: 14vw;
             margin-left: 5%;
             background-color: #EBF5FB;
         }
@@ -139,6 +140,7 @@
             background: none;
             color: inherit;
             border: none;
+            margin-left: 2vw;
         }
     
         .btn-all-colors
@@ -177,8 +179,8 @@
         .icons
         {
             border: none;
-            width: 12vw;
-            height: 12vw;
+            width: 7vmax;
+            height: 7vmax;
         }
     
         .icons:hover
@@ -624,5 +626,12 @@
         .desktop-more-section
         {
             width: 10vw;
+        }
+
+        #eraser-desktop:hover, #bucket-desktop:hover,
+        #zoom-desktop:hover, #brush-desktop:hover,
+        #spray-desktop:hover,#pencil-desktop:hover
+        {
+            background-color: #AED6F1;
         }
     }
