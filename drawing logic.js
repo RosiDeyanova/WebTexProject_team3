@@ -297,4 +297,6 @@ function stopTouch(event) {
         historyArray.push(context.getImageData(0, 0, canvas.width, canvas.height))
         index++
     }
+
 }
+

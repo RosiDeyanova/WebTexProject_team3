@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang=en>
     <head>
@@ -19,7 +18,7 @@
     </head>
     <body>
         <header id="container-header">
-            <div class="col brd">
+            <div class="col brd dropdown">
                 
                 <div class="three-btns only-desktop">
                     <img class="desktop-icons" id="bucket-desktop" src="https://img.icons8.com/color/344/fill-color.png"
@@ -30,8 +29,34 @@
                                 alt="Magnifier" width="1" height="60">
                 </div>
 
-                <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/1497/1497573.png"
-                    alt="Tools" width="30" height="30"> 
+                <button class="btn-dropdown" data-toggle="dropdown">
+                    <img class="img-center only-mobile" src="https://cdn-icons-png.flaticon.com/512/1497/1497573.png"
+                    alt="Tools" width="30" height="30"> </button> 
+
+                    <ul class="dropdown-menu menu only-mobile">
+
+                        <li class="tools-in-menu">
+                            <button class="btn-tools">
+                                <img class="img-center icons" id="img-tools" src="https://img.icons8.com/color/344/fill-color.png"
+                                alt="Bucket" width="1" height="60"> 
+                            </button>
+                        </li>
+        
+                        <li class="tools-in-menu">
+                            <button class="btn-tools">
+                                <img class="img-center icons" src="https://img.icons8.com/fluency/344/eraser-tool.png"
+                                alt="Rubber" width="1" height="60">
+                            </button>
+                        </li>
+        
+                        <li class="tools-in-menu">
+                            <button class="btn-tools" id="magnifier">
+                                <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/639/639375.png"
+                                alt="Magnifier" width="1" height="60">
+                            </button> 
+                        </li>
+
+                    </ul>
 
                 <div class="dropdown">
                     
@@ -57,7 +82,7 @@
                         </li>
         
                         <li class="tools-in-menu">
-                            <button class="btn-tools">
+                            <button class="btn-tools" id="magnifier">
                                 <img class="img-center icons" src="https://cdn-icons-png.flaticon.com/512/639/639375.png"
                                 alt="Magnifier" width="1" height="60">
                             </button> 
