@@ -1,17 +1,20 @@
-//the white serface we can draw on
-const canvas = document.getElementById("canvas")
-canvas.width = 300  //TODO: figure out how to make the canvas be wider than the page and add the ability to scroll only the canvas
-canvas.height = 300 //TODO: also figure out how to zoom in and out
+import { bucket } from './bucket.js'
 
-let widthCanvas = canvas.width
-let heightCanvas = canvas.height
+//the white serface we can draw on
+export const canvas = document.getElementById("canvas")
+
+let widthCanvas = 630
+let heightCanvas = 280
+
+canvas.width = widthCanvas  //TODO: figure out how to make the canvas be wider than the page and add the ability to scroll only the canvas
+canvas.height = heightCanvas //TODO: also figure out how to zoom in and out
 
 //initializes the canvas to be all white
-let context = canvas.getContext("2d")
+export let context = canvas.getContext("2d")
 context.fillStyle = "white"
 context.fillRect(0, 0, canvas.width, canvas.height)
 
-let drawColor = "rgb(0, 0, 0, 255)" //color used for brush and will be used for other tools
+let drawColor = "#000000" //color used for brush and will be used for other tools
 let drawWidth = "50" //sive of the brush or other tool
 
 let isDrawing = false //a flag that is true when we start drawing
@@ -29,136 +32,6 @@ bucketBtn.onclick = function () {
     usingBucket = true;
 }
 
-let paintedPixels = 0
-
-function bucket(x, y, bucketColor)
-{
-    var result = {x: x, y: y}
-    var newResult = {x: -1, y: -1}
-    for(var i = 0; i < 3; i++)
-    {
-        newResult = bucketColoring(result.x, result.y, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-
-        newResult = bucketColoring(result.x + 1, result.y, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-        newResult = bucketColoring(result.x, result.y + 1, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-        newResult = bucketColoring(result.x - 1, result.y, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-        newResult = bucketColoring(result.x, result.y - 1, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-
-        newResult = bucketColoring(result.x + 1, result.y + 1, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-        newResult = bucketColoring(result.x -1, result.y + 1, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-        newResult = bucketColoring(result.x - 1, result.y - 1, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-        newResult = bucketColoring(result.x + 1, result.y - 1, bucketColor, 0)
-        if(newResult.x != -1) {
-            result = newResult
-        }
-
-        paintedPixels = 0
-
-        if(newResult.y < 0)
-        {
-            console.log(result)
-            console.log("BAD")
-        }
-    }
-}
-
-function bucketColoring(x, y, bucketColor, i)
-{
-    var pixelData = context.getImageData(x, y, 1, 1)
-    var data = pixelData.data
-    var pixelColor = "rgb(" + data[0] + ", " + data[1] +", " + data[2] + ", " +data[3] + ")" //takes color of current pixel
-
-    if(pixelColor === bucketColor) 
-    {
-        //console.log("other color")
-        return {x: -1, y: -1}
-        //return {x: x, y: y}
-    }
-    if(x >= widthCanvas|| y >= heightCanvas)
-    {
-        //console.log("out of MAX")
-        return {x: -1, y: -1}
-        //return {x: x, y: y}
-    }
-    if(x < 0 || y < 0)
-    {
-        //console.log("out of MIN")
-        return {x: -1, y: -1}
-        //return {x: x, y: y}
-    }
-    //if(paintedPixels >= 100)
-    //{
-    //    return {x: x, y: y}
-    //}
-    if(i >= 500)
-    {
-        return {x: x, y: y}
-    }
-
-    //paintedPixels++
-
-    context.fillStyle = bucketColor
-    context.fillRect(x, y, 1, 1)
-
-    var result, newResult
-    result =  {x: -1, y: -1}
-
-    newResult = bucketColoring(x + 1, y, bucketColor, i + 1)
-    if(newResult != {x: -1, y: -1}) result = newResult
-
-
-    newResult = bucketColoring(x, y + 1, bucketColor, i + 1)
-    if(newResult != {x: -1, y: -1}) result = newResult
-
-    
-    newResult = bucketColoring(x - 1, y, bucketColor, i + 1)
-    if(newResult != {x: -1, y: -1}) result = newResult
-
-    
-    newResult = bucketColoring(x, y - 1, bucketColor, i + 1)
-    if(newResult != {x: -1, y: -1}) result = newResult
-
-    newResult = bucketColoring(x + 1, y + 1, bucketColor, i + 1)
-    if(newResult != {x: -1, y: -1}) result = newResult
-
-
-    newResult = bucketColoring(x - 1, y + 1, bucketColor, i + 1)
-    if(newResult != {x: -1, y: -1}) result = newResult
-
-    
-    newResult = bucketColoring(x - 1, y - 1, bucketColor, i + 1)
-    if(newResult != {x: -1, y: -1}) result = newResult
-
-    
-    newResult = bucketColoring(x + 1, y - 1, bucketColor, i + 1)
-    if(newResult != {x: -1, y: -1}) result = newResult
-
-    return result
-}
 
 const clearBtn = document.getElementById("clear-btn") //for now this is button "New" from "More"
 clearBtn.onclick = clearCanvas
