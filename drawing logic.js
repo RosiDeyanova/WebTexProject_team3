@@ -498,6 +498,8 @@ function stopTouch(event) {
             if (isDrawing) {
                 stopDrawingMobile(event)
                 isDrawing = false;
+
+                addToHistory()
             }
             break
 
