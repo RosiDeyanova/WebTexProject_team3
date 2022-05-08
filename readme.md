@@ -15,6 +15,7 @@ Added drawing functionality:
 -can resize brush
 -can change color
 - can erase
+- can redo
 
 TODO:
 -fix dropdown menu clipping outside the page
