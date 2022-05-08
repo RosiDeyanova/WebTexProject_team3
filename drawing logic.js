@@ -31,18 +31,35 @@ function clearCanvas() {
     index = -1
 }
 
+let lastChanges = [];
+
 //check if we have items in the history array and if so returns to the previous one returning our drawing to the previous step
 const undoBtn = document.getElementById("undo-btn")
-undoBtn.onclick = function () {
-    if(index <= 0) {
+undoBtn.onclick = function () 
+{
+    if(index <= 0) 
+    {
         clearCanvas()
     }
-    else {
+    else 
+    {
+        lastChanges.push(historyArray[historyArray.length - 1]);
         index--
         historyArray.pop()
         context.putImageData(historyArray[index], 0, 0)
     }
 }
+
+
+const redoBtn = document.getElementById("btn-redo");
+redoBtn.addEventListener("click", event =>
+{ 
+    index++;
+    historyArray.push(lastChanges[lastChanges.length - 1]);
+    context.putImageData(historyArray[index], 0, 0);
+    lastChanges.pop();
+});
+
 
 //COLORS for mobile
 
