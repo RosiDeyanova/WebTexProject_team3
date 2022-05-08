@@ -1,5 +1,6 @@
 import { bucket } from './bucket.js'
 import { startDrawingDesktop, drawingDesktop, stopDrawingDesktop, startDrawingMobile, drawingMobile, stopDrawingMobile } from './brush.js'
+import { startErasing, stopErasing, erasing } from './eraser-tool.js'
 
 //the white serface we can draw on
 export const canvas = document.getElementById("canvas")
@@ -355,6 +356,7 @@ function startMouse(event) {
             break
 
         case "eraser":
+            startErasing(event);
             console.log("clicked down with eraser")
             break    
 
@@ -387,6 +389,7 @@ function drawMouse(event) {
             break
 
         case "eraser":
+            erasing(event);
             console.log("dragged with eraser")
             break    
 
@@ -422,6 +425,7 @@ function stopMouse(event) {
             break
 
         case "eraser":
+            stopErasing();
             console.log("released with eraser")
             break    
 
