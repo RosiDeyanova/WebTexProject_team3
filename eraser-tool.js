@@ -14,31 +14,26 @@ basicRedColor.addEventListener("contextmenu", event =>
     eraserColor = basicRedColor.style.background; // TODO: delete inline style
 });
 
-// DESKTOP
-
-const eraser = document.getElementById("eraser-desktop"); 
-eraser.addEventListener("click", function()
+export function startErasing(event)
 {
-    //eraserColor = "#FFFFFF"
-    erasingIsOn = true;
+    isMoving = true;
+    context.beginPath();
+    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
+}
 
-    canvas.addEventListener("mousedown", function() // start drawing with eraser when click the mouse button
-    {
-        isMoving = true;
-    });
-    
-    canvas.addEventListener("mouseup", function() // stop drawing with eraser when mouse button is released
-    {
-        isMoving = false;
-    });
+export function stopErasing()
+{
+    isMoving = false;
+    context.closePath();
+}
 
-    canvas.addEventListener("mousemove", event => // draws with eraser between clicking with mouse button and releasing it
-    {
-        if (isMoving) 
+export function erasing(event)
+{
+    if (isMoving) 
         {
 			context.strokeStyle = eraserColor;
             context.lineWidth = brushSize.value;
-            context.beginPath();
+            context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
 
             if(erasingIsOn == true)
             {
@@ -52,10 +47,7 @@ eraser.addEventListener("click", function()
 
             context.stroke();
         }  
-    });
-
-});
-
+}
 
 const bucket_desktop = document.getElementById("bucket-desktop");
 const zoom_desktop = document.getElementById("zoom-desktop");
@@ -79,7 +71,7 @@ function turnEraserOff()
 
 // MOBILE: - TODO: fix gray color
 
-const eraser_mobile = document.getElementById("eraser");
+const eraser_mobile = document.getElementById("eraser-mobile");
 
 eraser_mobile.addEventListener("click", function()
 {

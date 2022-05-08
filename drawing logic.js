@@ -1,23 +1,102 @@
+import { bucket } from './bucket.js'
+import { startDrawingDesktop, drawingDesktop, stopDrawingDesktop, startDrawingMobile, drawingMobile, stopDrawingMobile } from './brush.js'
+import { startErasing, stopErasing, erasing } from './eraser-tool.js'
+
 //the white serface we can draw on
-const canvas = document.getElementById("canvas")
-canvas.width = 300  //TODO: figure out how to make the canvas be wider than the page and add the ability to scroll only the canvas
-canvas.height = 300 //TODO: also figure out how to zoom in and out
+export const canvas = document.getElementById("canvas")
+
+let widthCanvas = 310
+let heightCanvas = 520
+
+canvas.width = widthCanvas  //TODO: figure out how to make the canvas be wider than the page and add the ability to scroll only the canvas
+canvas.height = heightCanvas //TODO: also figure out how to zoom in and out
 
 //initializes the canvas to be all white
-let context = canvas.getContext("2d")
+export let context = canvas.getContext("2d")
 context.fillStyle = "white"
 context.fillRect(0, 0, canvas.width, canvas.height)
 
-let drawColor = "black" //color used for brush and will be used for other tools
-let drawWidth = "50" //sive of the brush or other tool
+export let drawColor = "#000000" //color used for brush and will be used for other tools
+export let drawWidth = "50" //sive of the brush or other tool
+
+let toolInUse = "brush"
 
 let isDrawing = false //a flag that is true when we start drawing
 
 let historyArray = [] //history array to keep each step of the drawing used to make undo possible
 let index = -1 //index for the array when its -1 we know its empty
 
+function addToHistory() {
+    //after we are done with this step of the drawing we take the painting so far and push it on the history array
+    historyArray.push(context.getImageData(0, 0, canvas.width, canvas.height))
+    index++ 
+}
+
 //TOOLS
 
+//for desktop
+const brushBtn = document.getElementById("brush-desktop")
+brushBtn.onclick = function () {
+    toolInUse = "brush"
+}
+
+const sprayBtn = document.getElementById("spray-desktop")
+sprayBtn.onclick = function () {
+    toolInUse = "spray"
+}
+
+const pencilBtn = document.getElementById("pencil-desktop")
+pencilBtn.onclick = function () {
+    toolInUse = "pencil"
+}
+
+const bucketBtn = document.getElementById("bucket-desktop")
+bucketBtn.onclick = function () {
+    toolInUse = "bucket"
+}
+
+const eraserBtn = document.getElementById("eraser-desktop")
+eraserBtn.onclick = function () {
+    toolInUse = "eraser"
+}
+
+const zoomBtn = document.getElementById("zoom-desktop")
+zoomBtn.onclick = function () {
+    toolInUse = "zoom"
+}
+
+//for mobile
+const brushBtnMob = document.getElementById("brush-mobile")
+brushBtnMob.onclick = function () {
+    toolInUse = "brush"
+}
+
+const sprayBtnMob = document.getElementById("spray-mobile")
+sprayBtnMob.onclick = function () {
+    toolInUse = "spray"
+}
+
+const pencilBtnMob = document.getElementById("pencil-mobile")
+pencilBtnMob.onclick = function () {
+    toolInUse = "pencil"
+}
+
+const bucketBtnMob = document.getElementById("bucket-mobile")
+bucketBtnMob.onclick = function () {
+    toolInUse = "bucket"
+}
+
+const eraserBtnMob = document.getElementById("eraser-mobile")
+eraserBtnMob.onclick = function () {
+    toolInUse = "eraser"
+}
+
+const zoomBtnMob = document.getElementById("zoom-mobile")
+zoomBtnMob.onclick = function () {
+    toolInUse = "zoom"
+}
+
+//for both
 const clearBtn = document.getElementById("clear-btn") //for now this is button "New" from "More"
 clearBtn.onclick = clearCanvas
 
@@ -117,8 +196,8 @@ basicDarkBlueColor.onclick = function () {
 }
 const basicBlueColor = document.getElementById("blue")
 basicBlueColor.onclick = function () {
-    changeColor("blue")
-    colorPicker.value = "#0000FF"
+    changeColor("rgb(0, 0, 255)")
+    colorPicker.value = "rgb(0, 0, 255)"
 }
 const basicGreenColor = document.getElementById("green")
 basicGreenColor.onclick = function () {
@@ -253,67 +332,218 @@ canvas.addEventListener("touchend", stopTouch, false)
 
 //for mouse
 function startMouse(event) {
-    isDrawing = true
-    context.beginPath()
-    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop) //event.clientX/Y are mouse coordinates and we offset them to be relative to the canvas
-}
+    switch (toolInUse) {
+        case "brush":
+            isDrawing = true
+            startDrawingDesktop(event)
+            break
 
-function drawMouse(event) {
-    if (isDrawing) {
-        context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
-        context.strokeStyle = drawColor
-        context.lineWidth = drawWidth
-        context.lineCap = "round"
-        context.lineJoin = "round"
-        context.stroke()
+        case "spray":
+            console.log("clicked down with spray")
+            break
+
+        case "pencil":
+            console.log("clicked down with pencil")
+            break    
+
+        case "bucket":
+            bucket(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop, drawColor)
+            if(event.clientX - canvas.offsetLeft >= 0 && event.clientX - canvas.offsetLeft < canvas.width &&
+                event.clientY - canvas.offsetTop >= 0 && event.clientY - canvas.offsetTop < canvas.height)
+            {
+                addToHistory()
+            }
+            break
+
+        case "eraser":
+            startErasing(event);
+            console.log("clicked down with eraser")
+            break    
+
+        case "zoom":
+            console.log("clicked down with zoom")
+            break   
+        
+        default:
+            console.log("ERROR: tool not selected")
     }
 }
 
+function drawMouse(event) {
+    switch (toolInUse) {
+        case "brush":
+            if (isDrawing) {
+                drawingDesktop(event)
+            }
+            break
+
+        case "spray":
+            console.log("dragged with spray")
+            break
+
+        case "pencil":
+            console.log("dragged with pencil")
+            break  
+
+        case "bucket":
+            break
+
+        case "eraser":
+            erasing(event);
+            console.log("dragged with eraser")
+            break    
+
+        case "zoom":
+            console.log("dragged with zoom")
+            break       
+        
+        default:
+            console.log("ERROR: tool not selected")
+    } 
+}
+
 function stopMouse(event) {
-    if (isDrawing) {
-        context.stroke()
-        context.closePath()
-        isDrawing = false;
-    
-        //after we are done with this step of the drawing we take the painting so far and push it on the history array
-        historyArray.push(context.getImageData(0, 0, canvas.width, canvas.height))
-        index++
+    switch (toolInUse) {
+        case "brush":
+            if (isDrawing) {
+                stopDrawingDesktop(event)
+                isDrawing = false
+
+                addToHistory()
+            }
+            break
+
+        case "spray":
+            console.log("released with spray")
+            break
+
+        case "pencil":
+            console.log("released  with pencil")
+            break  
+
+        case "bucket":
+            break
+
+        case "eraser":
+            stopErasing();
+            console.log("released with eraser")
+            break    
+
+        case "zoom":
+            console.log("released  with zoom")
+            break       
+        
+        default:
+            console.log("ERROR: tool not selected")
     }
 }
 
 //for touch screen
-let clientX, clientY; //seems like for touchscreen there is an array of clientX/Ys so we take only the first one
+
 function startTouch(event) {
-    clientX = event.touches[0].clientX;
-    clientY = event.touches[0].clientY;
-    isDrawing = true
-    context.beginPath()
-    context.moveTo(clientX - canvas.offsetLeft, clientY - canvas.offsetTop)
+    switch (toolInUse) {
+        case "brush":
+            isDrawing = true
+            startDrawingMobile(event)
+            break
+
+        case "spray":
+            console.log("clicked down with spray")
+            break
+
+        case "pencil":
+            console.log("clicked down with pencil")
+            break  
+
+        case "bucket":
+            let clientX, clientY
+            clientX = Math.round(event.touches[0].clientX)
+            clientY = Math.round(event.touches[0].clientY)
+
+            bucket(clientX - canvas.offsetLeft, clientY - canvas.offsetTop, drawColor)
+            if(clientX - canvas.offsetLeft >= 0 && clientX - canvas.offsetLeft < canvas.width &&
+                clientY - canvas.offsetTop >= 0 && clientY - canvas.offsetTop < canvas.height)
+            {
+                addToHistory()
+            }
+            break
+
+        case "eraser":
+            console.log("clicked down with eraser")
+            break    
+
+        case "zoom":
+            console.log("clicked down with zoom")
+            break 
+        
+        default:
+            console.log("ERROR: tool not selected")
+    }
 }
 
 function drawTouch(event) {
-    if (isDrawing) {
-        clientX = event.touches[0].clientX;
-        clientY = event.touches[0].clientY;
-        context.lineTo(clientX - canvas.offsetLeft, clientY - canvas.offsetTop)
-        context.strokeStyle = drawColor
-        context.lineWidth = drawWidth
-        context.lineCap = "round"
-        context.lineJoin = "round"
-        context.stroke()
-    }
+    switch (toolInUse) {
+        case "brush":
+            if (isDrawing) {
+                drawingMobile(event)
+            }
+            break
+
+        case "spray":
+            console.log("dragged with spray")
+            break
+
+        case "pencil":
+            console.log("dragged with pencil")
+            break  
+
+        case "bucket":
+            break
+
+        case "eraser":
+            console.log("dragged with eraser")
+            break    
+
+        case "zoom":
+            console.log("dragged with zoom")
+            break       
+        
+        default:
+            console.log("ERROR: tool not selected")
+    } 
 }
 
 function stopTouch(event) {
-    if (isDrawing) {
-        context.stroke()
-        context.closePath()
-        isDrawing = false;
+    switch (toolInUse) {
+        case "brush":
+            if (isDrawing) {
+                stopDrawingMobile(event)
+                isDrawing = false;
 
-        //after we are done with this step of the drawing we take the painting so far and push it on the history array
-        historyArray.push(context.getImageData(0, 0, canvas.width, canvas.height))
-        index++
-    }
+                addToHistory()
+            }
+            break
 
+        case "spray":
+            console.log("released with spray")
+            break
+
+        case "pencil":
+            console.log("released  with pencil")
+            break  
+
+        case "bucket":
+            break
+
+        case "eraser":
+            console.log("released with eraser")
+            break    
+
+        case "zoom":
+            console.log("released  with zoom")
+            break       
+        
+        default:
+            console.log("ERROR: tool not selected")
+    } 
 }
-
