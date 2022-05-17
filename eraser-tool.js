@@ -77,16 +77,23 @@ eraser_mobile.addEventListener("click", function()
 {
     eraserColor = "#fa0000"
     erasingIsOn = true;
+    let clientX, clientY;
 
-    canvas.addEventListener("touchstart", function() // start touching the screen - drawing with eraser starts
+    canvas.addEventListener("touchstart", function(event) // start touching the screen - drawing with eraser starts
     {
         isMoving = true;
+
+        clientX = event.touches[0].clientX;
+        clientY = event.touches[0].clientY;
+        context.beginPath();
+        context.moveTo(clientX - canvas.offsetLeft, clientY - canvas.offsetTop);
     });
     
     canvas.addEventListener("touchend", function() // stop touching the screen - drawing with eraser stops
     {
         isMoving = false;
         console.log("touch ended");
+        context.closePath();
     });
 
     canvas.addEventListener("touchmove", event => // draws with eraser between touching screen and stop touching screen
@@ -95,7 +102,10 @@ eraser_mobile.addEventListener("click", function()
         {
 			context.strokeStyle = "#fa0000";
             context.lineWidth = brushSize.value;
-            context.beginPath();
+
+            clientX = event.touches[0].clientX;
+            clientY = event.touches[0].clientY;
+            context.lineTo(clientX - canvas.offsetLeft, clientY - canvas.offsetTop);
 
             // https://www.w3schools.com/tags/canvas_globalcompositeoperation.asp
 
