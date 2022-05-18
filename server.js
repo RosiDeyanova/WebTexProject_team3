@@ -1,3 +1,4 @@
+import { MongoClient } from 'mongodb';
 const express = require('express');
 
 const app = express();
@@ -11,5 +12,12 @@ app.get('/',function(req,res)
 
 // visualise css (public\css) and js
 app.use(express.static(__dirname + '/'));
+
+MongoClient.connect("mongodb+srv://root:root@cluster0.8eazs.mongodb.net/?retryWrites=true&w=majority",(error,client)=>{
+    if(error){
+        client.close();
+        return;
+    }
+});
 
 app.listen(3000);
