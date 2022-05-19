@@ -16,7 +16,7 @@ export default class AlbumsController {
     public async addAlbum(album: IAlbum): Promise<AlbumDocument> {
         const newAlbum: AlbumDocument = new Album({
             _id: new mongoose.Types.ObjectId(),
-            ...Album
+            ...album
         });
 
         return await newAlbum.save();
