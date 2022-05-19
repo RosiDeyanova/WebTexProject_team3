@@ -235,6 +235,12 @@
                             New
                             </button> 
                         </li>
+
+                        <li class="tools-in-menu">
+                            <button class="btn-tools items-more" id="clear-btn" data-toggle="modal" data-target="#exampleModal">
+                            Album
+                            </button> 
+                        </li>
                     </ul>
                 </div>
         </header>
@@ -242,6 +248,23 @@
         <div class="canvas-holder">
             <canvas id="canvas"></canvas>
         </div>
-        
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"> Album</h5>
+                  </button>
+                </div>
+                <div class="modal-body">
+                 <img src= "img/images.png" width="150" height="150">
+                 <img src= "img/свали.jpg"  width="150" height="150">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </body>
 </html>
