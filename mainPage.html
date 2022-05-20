@@ -10,8 +10,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" href="public/css/styles.css">
-        <script src="drawing logic.js"  defer type="module"></script>
+        <link rel="stylesheet" href="client/css/styles.css">
+        <script src="client/project_tools/drawing logic.js"  defer type="module"></script>
 
         <title>Paint</title>
 
@@ -243,5 +243,23 @@
             <canvas id="canvas"></canvas>
         </div>
         
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"> Album</h5>
+                  </button>
+                </div>
+                <div class="modal-body">
+                 <img src= "client/img/images.png" width="150" height="150">
+                 <img src= "client/img/свали.jpg"  width="150" height="150">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </body>
 </html>
