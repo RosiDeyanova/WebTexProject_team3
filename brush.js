@@ -1,4 +1,4 @@
-import { context, canvas, drawColor, drawWidth } from './drawing logic.js'
+import { context, canvas, drawColor, drawWidth } from '../drawing logic.js'
 
 //desktop
 

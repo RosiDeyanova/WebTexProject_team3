@@ -1,4 +1,4 @@
-import { context, canvas } from './drawing logic.js'
+import { context, canvas } from './public/drawing logic.js'
 
 let mask
 

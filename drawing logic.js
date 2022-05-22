@@ -1,6 +1,6 @@
 import { bucket } from './bucket.js'
 import { startDrawingDesktop, drawingDesktop, stopDrawingDesktop, startDrawingMobile, drawingMobile, stopDrawingMobile } from './brush.js'
-import { startErasing, stopErasing, erasing } from './eraser-tool.js'
+import { startErasing, stopErasing, erasing } from './public/eraser-tool.js'
 
 //the white serface we can draw on
 export const canvas = document.getElementById("canvas")
