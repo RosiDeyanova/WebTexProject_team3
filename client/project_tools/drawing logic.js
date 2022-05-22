@@ -157,7 +157,7 @@ basicBlackColor.onclick = function () {
 const basicGrayColor = document.getElementById("gray")
 basicGrayColor.onclick = function () {
     changeColor("gray")
-    colorPicker.value = "888888"
+    colorPicker.value = "#888888"
 }
 const basicDarkRedColor = document.getElementById("dark-red")
 basicDarkRedColor.onclick = function () {

@@ -4,30 +4,132 @@ var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 
 var isMoving = false;
-var eraserColor = "#FFFFFF"; // canvas color -> TODO: choose color with right click
+var eraserColor;
 var erasingIsOn = false;
 
+// DESKTOP:
 
-const basicRedColor = document.getElementById("desktop-red");
-basicRedColor.addEventListener("contextmenu", event =>
+function changeColor(colorElement) 
 {
-    eraserColor = basicRedColor.style.background; // TODO: delete inline style
+    eraserColor = colorElement;
+}
+
+const colorPickerDesktop = document.getElementById("color-picker-desktop");
+colorPickerDesktop.oninput = function () 
+{
+    eraserColor = colorPickerDesktop.value;
+}
+
+const desktopBlackColor = document.getElementById("desktop-black");
+desktopBlackColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault(); // remove auto context menu
+    changeColor("black");
+    colorPickerDesktop.value = "#000000"; 
 });
 
-export function startErasing(event)
+const basicGrayColor = document.getElementById("desktop-gray")
+basicGrayColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("gray");
+    colorPickerDesktop.value = "#888888";
+});
+
+const basicDarkRedColor = document.getElementById("desktop-dark-red")
+basicDarkRedColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("#8B0000");
+    colorPickerDesktop.value = "#8B0000";
+});
+
+const basicRedColor = document.getElementById("desktop-red")
+basicRedColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("red");
+    colorPickerDesktop.value = "#FF0000";
+});
+
+const basicOrangeColor = document.getElementById("desktop-orange")
+basicOrangeColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("orange");
+    colorPickerDesktop.value = "#FFA500";
+});
+
+const basicYellowColor = document.getElementById("desktop-yellow")
+basicYellowColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("yellow");
+    colorPickerDesktop.value = "#FFFF00";
+});
+
+const basicWhiteColor = document.getElementById("desktop-white")
+basicWhiteColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("white");
+    colorPickerDesktop.value = "#FFFFFF";
+});
+
+const basicPurpleColor = document.getElementById("desktop-purple")
+basicPurpleColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("purple");
+    colorPickerDesktop.value = "#800080";
+});
+
+const basicDarkBlueColor = document.getElementById("desktop-dark-blue")
+basicDarkBlueColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("#00008b");
+    colorPickerDesktop.value = "#00008B";
+});
+
+const basicBlueColor = document.getElementById("desktop-blue")
+basicBlueColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("rgb(0, 0, 255)");
+    colorPickerDesktop.value = "rgb(0, 0, 255)";
+});
+
+const basicGreenColor = document.getElementById("desktop-green")
+basicGreenColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("green")
+    colorPickerDesktop.value = "#008000"
+});
+
+const basicLimeColor = document.getElementById("desktop-lime")
+basicLimeColor.addEventListener("contextmenu", event => 
+{
+    event.preventDefault();
+    changeColor("#00FF00")
+    colorPickerDesktop.value = "#00FF00"
+});
+
+export function startErasing(event) // mouse is down - called in switch
 {
     isMoving = true;
     context.beginPath();
-    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
+    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
 }
 
-export function stopErasing()
+export function stopErasing() // mouse is up - called in switch
 {
     isMoving = false;
     context.closePath();
 }
 
-export function erasing(event)
+export function erasing(event) // mousemove - switch
 {
     if (isMoving) 
         {
@@ -37,12 +139,12 @@ export function erasing(event)
 
             if(erasingIsOn == true)
             {
-              context.globalCompositeOperation="destination-out";
+              context.globalCompositeOperation="destination-out"; // destination image is shown (eraser), source image is transparent (brush)
             }
 
             else
             {
-              context.globalCompositeOperation="source-over"; 
+              context.globalCompositeOperation="source-over"; // destination image out of the source image
             }
 
             context.stroke();
@@ -69,7 +171,7 @@ function turnEraserOff()
 }
 
 
-// MOBILE: - TODO: fix gray color
+// MOBILE:
 
 const eraser_mobile = document.getElementById("eraser-mobile");
 
@@ -107,8 +209,6 @@ eraser_mobile.addEventListener("click", function()
             clientY = event.touches[0].clientY;
             context.lineTo(clientX - canvas.offsetLeft, clientY - canvas.offsetTop);
 
-            // https://www.w3schools.com/tags/canvas_globalcompositeoperation.asp
-
             if(erasingIsOn == true)
             {
               context.globalCompositeOperation="destination-out"; // erases over the drawing
@@ -124,22 +224,6 @@ eraser_mobile.addEventListener("click", function()
     });
 });
 
-
 // stop using eraser when other tool is clicked
 const brush = document.getElementById("brush-mobile");
 brush.addEventListener("click", turnEraserOff);
-
-/*
-const bucket = document.getElementById("bucket-mobile");
-const zoom = document.getElementById("zoom-mobile");
-const brush = document.getElementById("brush-mobile");
-const spray = document.getElementById("spray-mobile");
-const pencil = document.getElementById("pencil-mobile");
-
-
-bucket.addEventListener("click", turnEraserOff);
-zoom.addEventListener("click", turnEraserOff);
-brush.addEventListener("click", turnEraserOff);
-spray.addEventListener("click", turnEraserOff);
-pencil.addEventListener("click", turnEraserOff); 
-*/
