@@ -22,5 +22,3 @@ TODO:
 -fix dropdown color-palette
 -figure how to make scroll on the canvas without scrolling the whole page
 -add other brushes and tools functionality
-- fix eraser for mobile - color gray
-- add switching tool for all tools - mobile version (change & add id-s in html)
