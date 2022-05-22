@@ -1,3 +1,4 @@
+
 //the white serface we can draw on
 const canvas = document.getElementById("canvas")
 canvas.width = 300  //TODO: figure out how to make the canvas be wider than the page and add the ability to scroll only the canvas
@@ -12,40 +13,9 @@ let drawColor = "black" //color used for brush and will be used for other tools
 let drawWidth = "50" //sive of the brush or other tool
 
 let isDrawing = false //a flag that is true when we start drawing
-
-let historyArray = [] //history array to keep each step of the drawing used to make undo possible
-let index = -1 //index for the array when its -1 we know its empty
 let usingPencil = false  //when using pencil we can not use the size menu 
 
-
-//TOOLS
-
-const clearBtn = document.getElementById("clear-btn") //for now this is button "New" from "More"
-clearBtn.onclick = clearCanvas
-
-//re-initializes the canvas to be all white with empty history array
-function clearCanvas() {
-    context.fillStyle = "white"
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    context.fillRect(0, 0, canvas.width, canvas.height)
-
-    historyArray = []
-    index = -1
-}
-
-//check if we have items in the history array and if so returns to the previous one returning our drawing to the previous step
-const undoBtn = document.getElementById("undo-btn")
-undoBtn.onclick = function () {
-    if(index <= 0) {
-        clearCanvas()
-    }
-    else {
-        index--
-        historyArray.pop()
-        context.putImageData(historyArray[index], 0, 0)
-    }
-}
-
+/*
 //COLORS for mobile
 
 //color input element
@@ -63,7 +33,7 @@ basicBlackColor.onclick = function () {
 const basicGrayColor = document.getElementById("gray")
 basicGrayColor.onclick = function () {
     changeColor("gray")
-    colorPicker.value = "888888"
+    colorPicker.value = "#888888"
 }
 const basicDarkRedColor = document.getElementById("dark-red")
 basicDarkRedColor.onclick = function () {
@@ -309,6 +279,7 @@ function stopTouch(event) {
 }
 
 
+*/
 
 //pencil 
 
