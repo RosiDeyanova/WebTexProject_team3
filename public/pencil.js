@@ -1,4 +1,4 @@
-import { context, canvas, drawColor, drawWidth } from './drawing logic.js'
+import { context, canvas, drawColor } from './drawing logic.js'
 
 //for mouse
 export function startMouse(event) {
@@ -11,7 +11,7 @@ export function drawMouse(event) {
     
         context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
         context.strokeStyle = drawColor
-        context.lineWidth = drawWidth
+        context.lineWidth = "2"
         context.lineCap = "round"
         context.lineJoin = "round"
         context.stroke()
