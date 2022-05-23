@@ -1,6 +1,7 @@
 import { bucket } from './bucket.js'
 import { startDrawingDesktop, drawingDesktop, stopDrawingDesktop, startDrawingMobile, drawingMobile, stopDrawingMobile } from './brush.js'
 import { startErasing, stopErasing, erasing } from './eraser-tool.js'
+import { startMouse as startPencil, drawMouse as drawPencil, stopMouse as stopPencil, startTouch as startPencilMobile, drawTouch as drawingPencilMobile, stopTouch as stopPencilMobile } from './pencil.js'
 
 //the white serface we can draw on
 export const canvas = document.getElementById("canvas")
@@ -79,6 +80,7 @@ sprayBtnMob.onclick = function () {
 const pencilBtnMob = document.getElementById("pencil-mobile")
 pencilBtnMob.onclick = function () {
     toolInUse = "pencil"
+    drawWidth = 2
 }
 
 const bucketBtnMob = document.getElementById("bucket-mobile")
@@ -343,7 +345,8 @@ function startMouse(event) {
             break
 
         case "pencil":
-            console.log("clicked down with pencil")
+            isDrawing = true
+            startPencil(event)
             break    
 
         case "bucket":
@@ -382,7 +385,9 @@ function drawMouse(event) {
             break
 
         case "pencil":
-            console.log("dragged with pencil")
+            if(isDrawing){
+                drawPencil(event)
+            }
             break  
 
         case "bucket":
@@ -418,7 +423,12 @@ function stopMouse(event) {
             break
 
         case "pencil":
-            console.log("released  with pencil")
+            if(isDrawing){
+                stopPencil(event)
+                isDrawing = false
+
+                addToHistory()
+            }
             break  
 
         case "bucket":
@@ -452,7 +462,8 @@ function startTouch(event) {
             break
 
         case "pencil":
-            console.log("clicked down with pencil")
+            isDrawing = true
+            startPencilMobile(event)
             break  
 
         case "bucket":
@@ -494,7 +505,9 @@ function drawTouch(event) {
             break
 
         case "pencil":
-            console.log("dragged with pencil")
+            if (isDrawing) {
+                drawingPencilMobile(event)
+            }
             break  
 
         case "bucket":
@@ -529,7 +542,12 @@ function stopTouch(event) {
             break
 
         case "pencil":
-            console.log("released  with pencil")
+            if (isDrawing) {
+                stopPencilMobile(event)
+                isDrawing = false;
+
+                addToHistory()
+            }
             break  
 
         case "bucket":
