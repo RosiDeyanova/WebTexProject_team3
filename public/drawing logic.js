@@ -80,7 +80,7 @@ sprayBtnMob.onclick = function () {
 const pencilBtnMob = document.getElementById("pencil-mobile")
 pencilBtnMob.onclick = function () {
     toolInUse = "pencil"
-    drawWidth = 2
+    drawWidth = "2"
 }
 
 const bucketBtnMob = document.getElementById("bucket-mobile")
