@@ -7,9 +7,9 @@ const Schema = mongoose.Schema;
 //export interface AlbumModel extends Model<AlbumDocument> {}
 
 const AlbumSchema = new Schema({
-    userId: String,
-    imgBase64: String
-   /*  userId:{
+    /* userId: String,
+    imgBase64: String */
+    userId:{
         type: String,
         required:[true, 'userId is required field!']
     },
@@ -20,7 +20,7 @@ const AlbumSchema = new Schema({
             validator: (value) => /^data:image.*$/.test(value),
             message: 'Invalid base64 encoding'
         }
-    } */
+    } 
 });
 
 const Album = mongoose.model('Album', AlbumSchema);
