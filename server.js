@@ -6,7 +6,7 @@ app.use(express.json());
 // visualise html
 app.get('/',function(req,res) 
 {
-    res.sendFile('C:/Users/user/Documents/GitHub/WebTexProject_team3/public/mainPage.html');
+    res.sendFile('C:/Users/Mimi/Documents/GitHub/WebTexProject_team3/public/mainPage.html');
 });
 
 // visualise css (public\css) and js

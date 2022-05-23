@@ -1,25 +1,5 @@
 import { context, canvas, drawColor, drawWidth } from './drawing logic.js'
 
-
-
-//the white serface we can draw on
-const canvas = document.getElementById("canvas")
-canvas.width = 300  //TODO: figure out how to make the canvas be wider than the page and add the ability to scroll only the canvas
-canvas.height = 300 //TODO: also figure out how to zoom in and out
-
-//initializes the canvas to be all white
-let context = canvas.getContext("2d")
-context.fillStyle = "white"
-context.fillRect(0, 0, canvas.width, canvas.height)
-
-let drawColor = "black" //color used for brush and will be used for other tools
-let drawWidth = "50" //sive of the brush or other tool
-
-let isDrawing = false //a flag that is true when we start drawing
-let usingPencil = false  //when using pencil we can not use the size menu 
-
-
-
 //for mouse
 export function startMouse(event) {
    
