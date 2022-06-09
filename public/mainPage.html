@@ -13,6 +13,7 @@
         <link type="text/css" rel="stylesheet" href="styles.css">
         <script src="drawing logic.js"  defer type="module"></script>
         <script src="uploadPhoto.js"  defer type="module"></script>
+        <script src="editPhoto.js"  defer type="module"></script>
 
         <title>Paint</title>
 
@@ -234,7 +235,7 @@
                             <script>
                                   function download() {
                                         axios({
-                                              url: 'http://localhost:3001/',
+                                              url: 'http://localhost:3000/',
                                               method: 'GET',
                                               responseType: 'blob'
                                         })
@@ -300,8 +301,8 @@
                   </button>
                 </div>
                 <div class="modal-body" id="album-pictures">
-                 <img src= "images.png" width="150" height="150">
-                 <img src= "свали.jpg"  width="150" height="150">
+                 <img src= "images.png" class="pictures" width="150" height="150">
+                 <img src= "свали.jpg"  class="pictures" width="150" height="150">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

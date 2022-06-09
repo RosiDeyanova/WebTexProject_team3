@@ -12,6 +12,7 @@ image_input.addEventListener("change", function()
 
     // add uploaded picture to album
     var newPic = document.createElement("div");
+    newPic.classList.add("pictures");
     newPic.style.width = "300px";
     newPic.style.height = "225px";
     newPic.style.backgroundPosition = "center";
