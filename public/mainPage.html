@@ -12,6 +12,7 @@
 
         <link type="text/css" rel="stylesheet" href="styles.css">
         <script src="drawing logic.js"  defer type="module"></script>
+        <script src="uploadPhoto.js"  defer type="module"></script>
 
         <title>Paint</title>
 
@@ -219,9 +220,9 @@
                         </li>
 
                         <li class="tools-in-menu">
-                            <button class="btn-tools items-more">
+                            <button class="btn-tools items-more" data-toggle="modal" data-target="#uploadPhoto">
                                 Upload
-                            </button>
+                            </button>      
                         </li>
         
                         <li class="tools-in-menu">
@@ -249,14 +250,34 @@
             <canvas id="canvas"></canvas>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-- dialog window for uploading photo -->
+          <div class="modal fade" id="uploadPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"> Upload</h5>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
+                    <div id="display-image"></div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- dialog window for album -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel"> Album</h5>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="album-pictures">
                  <img src= "images.png" width="150" height="150">
                  <img src= "свали.jpg"  width="150" height="150">
                 </div>
@@ -266,5 +287,6 @@
               </div>
             </div>
           </div>
+
     </body>
 </html>
