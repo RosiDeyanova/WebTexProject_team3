@@ -13,6 +13,7 @@
         <link type="text/css" rel="stylesheet" href="styles.css">
         <script src="drawing logic.js"  defer type="module"></script>
         <script src="uploadPhoto.js"  defer type="module"></script>
+        <script src="editPhoto.js"  defer type="module"></script>
 
         <title>Paint</title>
 
@@ -229,6 +230,28 @@
                             <button class="btn-tools items-more">
                                 Download
                             </button>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js">
+                            </script>
+                            <script>
+                                  function download() {
+                                        axios({
+                                              url: 'http://localhost:3000/',
+                                              method: 'GET',
+                                              responseType: 'blob'
+                                        })
+                                              .then((response) => {
+                                                    const url = window.URL
+                                                          .createObjectURL(new Blob([response.data]));
+                                                    const link = document.createElement('a');
+                                                    link.href = url;
+                                                    link.setAttribute('download', 'image.jpg');
+                                                    document.body.appendChild(link);
+                                                    link.click();
+                                                    document.body.removeChild(link);
+                                              })
+                                  }
+                      
+                            </script>
                         </li>
         
                         <li class="tools-in-menu">
@@ -278,8 +301,8 @@
                   </button>
                 </div>
                 <div class="modal-body" id="album-pictures">
-                 <img src= "images.png" width="150" height="150">
-                 <img src= "свали.jpg"  width="150" height="150">
+                 <img src= "images.png" class="pictures" width="150" height="150">
+                 <img src= "свали.jpg"  class="pictures" width="150" height="150">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
