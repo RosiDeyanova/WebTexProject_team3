@@ -16,6 +16,8 @@ Added drawing functionality:
 -can change color
 - can erase
 - can redo
+- can upload a photo
+- can edit a photo
 
 TODO:
 -fix dropdown menu clipping outside the page
