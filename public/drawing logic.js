@@ -7,7 +7,7 @@ import { startMouse as startPencil, drawMouse as drawPencil, stopMouse as stopPe
 export const canvas = document.getElementById("canvas")
 
 let widthCanvas = 310
-let heightCanvas = 520
+let heightCanvas = 500
 
 canvas.width = widthCanvas  //TODO: figure out how to make the canvas be wider than the page and add the ability to scroll only the canvas
 canvas.height = heightCanvas //TODO: also figure out how to zoom in and out

@@ -108,7 +108,7 @@ export function bucket(x, y, bucketColor)
                 if(chunk.y > 0) { //check top
                     for(let i = 0; i < 50; i++) 
                     {
-                        if(chunk.x + i < canvas.width)
+                        if(chunk.x + i < canvas.width && chunk.y < canvas.height)
                         {
                             if(mask[chunk.y - 1][chunk.x + i] == 2 && mask[chunk.y][chunk.x + i] == 0)
                             {
