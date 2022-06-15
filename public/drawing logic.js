@@ -3,6 +3,7 @@ import { startDrawingDesktop, drawingDesktop, stopDrawingDesktop, startDrawingMo
 import { startErasing, stopErasing, erasing } from './eraser-tool.js'
 import { startMouse as startPencil, drawMouse as drawPencil, stopMouse as stopPencil, startTouch as startPencilMobile, drawTouch as drawingPencilMobile, stopTouch as stopPencilMobile } from './pencil.js'
 import { zoomIn, pixelate, setNoZoomImg, scale} from './zoom.js'
+import { drawingDesktop as sprayDesktop, startDrawingDesktop as startSprayDesktop, stopDrawingDesktop as stopSprayDesktop } from './spray.js'
 
 //the white serface we can draw on
 export const canvas = document.getElementById("canvas")
@@ -344,7 +345,7 @@ function startMouse(event) {
             break
 
         case "spray":
-            console.log("clicked down with spray")
+            startSprayDesktop()
             break
 
         case "pencil":
@@ -387,7 +388,7 @@ function drawMouse(event) {
             break
 
         case "spray":
-            console.log("dragged with spray")
+            sprayDesktop(event)
             break
 
         case "pencil":
@@ -424,7 +425,7 @@ function stopMouse(event) {
             break
 
         case "spray":
-            console.log("released with spray")
+            stopSprayDesktop()
             break
 
         case "pencil":
@@ -489,7 +490,10 @@ function startTouch(event) {
             break    
 
         case "zoom":
-            //console.log("clicked down with zoom")
+            pixelate(scale)
+            if(scale == 1)
+                setNoZoomImg()
+            zoomIn(event, scale)
             break 
         
         default:
