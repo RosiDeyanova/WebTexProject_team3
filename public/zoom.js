@@ -93,6 +93,78 @@ export function zoomIn(event) {
     }
 }
 
+export function zoomInMobile(event) {
+    scale *= 2 //each time we zoom everything becomes 2 time bigger
+
+    //if we zoom 3 times we zoom out to the whole img again
+    if(scale >= 8) {
+        for(let i = 0; i < canvas.height; i++) {
+            for(let j = 0; j < canvas.width; j++) {  
+                context.fillStyle = noZoomImg[i][j]
+                context.fillRect(j, i, 1, 1)
+            }
+        }
+
+        xOffsetDelta = 0
+        yOffsetDelta = 0
+        scale = 1
+        return
+    }
+
+    let imgArr = new Array(canvas.height) //each mask element/pixel can have a value from 0 to 2 (0 mean its the color we are painting over)(1 means its a color we are not painting over)(2 means we already painted over this pixel)
+
+    var pixelData
+    var data
+
+    //saves the color data of the current canvas
+    for(let i = 0; i < canvas.height; i++) {
+        imgArr[i] = []
+        for(let j = 0; j < canvas.width; j++) {
+            pixelData = context.getImageData(j, i, 1, 1)
+            data = pixelData.data
+            imgArr[i][j] = "rgb(" + data[0] + ", " + data[1] +", " + data[2] + ", " +data[3] + ")"
+        }
+    }
+
+    //we offset the relative to the whole img or the once zoomed img
+    var xOffset = (event.touches[0].clientX - canvas.offsetLeft)
+    var yOffset = (event.touches[0].clientY - canvas.offsetTop)
+
+    //sets the center of the new canvas to be where we clicked
+    xOffset -= Math.floor(canvas.width / 4)
+    yOffset -= Math.floor(canvas.height / 4)
+
+    if(xOffset > canvas.width / 2)
+        xOffset = canvas.width / 2
+    else if(xOffset < 0)
+        xOffset = 0
+
+    if(yOffset > canvas.height / 2)
+        yOffset = canvas.height / 2
+    else if(yOffset < 0)
+        yOffset = 0
+
+    //sets the right delta offset (the offset relative to the whole img) needed to keep the new drawing to the img when we zoom out
+    if(scale == 2)
+    {
+        xOffsetDelta += xOffset
+        yOffsetDelta += yOffset
+    }
+    else if(scale == 4)
+    {
+        xOffsetDelta += Math.floor(xOffset / 2)
+        yOffsetDelta += Math.floor(yOffset / 2)
+    }
+
+    //draws the new zoomed in canvas
+    for(let i = 0; i < canvas.height / 2; i++) {
+        for(let j = 0; j < canvas.width / 2; j++) {  
+            context.fillStyle = imgArr[i + yOffset][j + xOffset]
+            context.fillRect(j * 2, i * 2, 2, 2)
+        }
+    }
+}
+
 //makes the pixels of the new drawing up to scale when we are zoomed in
 //changes values in the array holding the color values of the whole img so that what we draw when we are zoomed in is saved in the right location when we zoom out
 export function pixelate(scale)

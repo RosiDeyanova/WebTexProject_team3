@@ -2,8 +2,8 @@ import { bucket } from './bucket.js'
 import { startDrawingDesktop, drawingDesktop, stopDrawingDesktop, startDrawingMobile, drawingMobile, stopDrawingMobile } from './brush.js'
 import { startErasing, stopErasing, erasing } from './eraser-tool.js'
 import { startMouse as startPencil, drawMouse as drawPencil, stopMouse as stopPencil, startTouch as startPencilMobile, drawTouch as drawingPencilMobile, stopTouch as stopPencilMobile } from './pencil.js'
-import { zoomIn, pixelate, setNoZoomImg, scale} from './zoom.js'
-import { drawingDesktop as sprayDesktop, startDrawingDesktop as startSprayDesktop, stopDrawingDesktop as stopSprayDesktop } from './spray.js'
+import { zoomIn, zoomInMobile, pixelate, setNoZoomImg, scale} from './zoom.js'
+import { drawingDesktop as sprayDesktop, startDrawingDesktop as startSprayDesktop, stopDrawingDesktop as stopSprayDesktop, startDrawingMobile as startSprayMobile, drawingMobile as sprayMobile, stopDrawingMobile as stopSprayMobile } from './spray.js'
 
 //the white serface we can draw on
 export const canvas = document.getElementById("canvas")
@@ -371,7 +371,7 @@ function startMouse(event) {
             pixelate(scale)
             if(scale == 1)
                 setNoZoomImg()
-            zoomIn(event, scale)
+            zoomIn(event)
             break   
         
         default:
@@ -464,7 +464,7 @@ function startTouch(event) {
             break
 
         case "spray":
-            console.log("clicked down with spray")
+            startSprayMobile()
             break
 
         case "pencil":
@@ -493,8 +493,8 @@ function startTouch(event) {
             pixelate(scale)
             if(scale == 1)
                 setNoZoomImg()
-            zoomIn(event, scale)
-            break 
+            zoomInMobile(event)
+            break   
         
         default:
             console.log("ERROR: tool not selected")
@@ -510,7 +510,7 @@ function drawTouch(event) {
             break
 
         case "spray":
-            console.log("dragged with spray")
+            sprayMobile(event)
             break
 
         case "pencil":
@@ -547,7 +547,7 @@ function stopTouch(event) {
             break
 
         case "spray":
-            console.log("released with spray")
+            stopSprayMobile()
             break
 
         case "pencil":
