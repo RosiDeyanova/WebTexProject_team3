@@ -2,6 +2,7 @@ import { bucket } from './bucket.js'
 import { startDrawingDesktop, drawingDesktop, stopDrawingDesktop, startDrawingMobile, drawingMobile, stopDrawingMobile } from './brush.js'
 import { startErasing, stopErasing, erasing } from './eraser-tool.js'
 import { startMouse as startPencil, drawMouse as drawPencil, stopMouse as stopPencil, startTouch as startPencilMobile, drawTouch as drawingPencilMobile, stopTouch as stopPencilMobile } from './pencil.js'
+import { zoomIn, pixelate, setNoZoomImg, scale} from './zoom.js'
 
 //the white serface we can draw on
 export const canvas = document.getElementById("canvas")
@@ -26,6 +27,8 @@ let isDrawing = false //a flag that is true when we start drawing
 
 let historyArray = [] //history array to keep each step of the drawing used to make undo possible
 let index = -1 //index for the array when its -1 we know its empty
+
+export let noZoomImg = new Array(canvas.height) //array that holds the color data of each pixel used to keep the whole img when we zoom in
 
 function addToHistory() {
     //after we are done with this step of the drawing we take the painting so far and push it on the history array
@@ -332,124 +335,6 @@ canvas.addEventListener("mouseup", stopMouse, false)
 canvas.addEventListener("mouseout", stopMouse, false) //also calls stop drawing function if we go outside the screen with the mouse
 canvas.addEventListener("touchend", stopTouch, false)
 
-let noZoomImg = new Array(canvas.height)
-let noZoomPixel
-let noZoomData
-let scale = 1
-
-function setNoZoomImg() {
-        for(let i = 0; i < canvas.height; i++) {
-        noZoomImg[i] = []
-            for(let j = 0; j < canvas.width; j++) {
-                noZoomPixel = context.getImageData(j, i, 1, 1)
-                noZoomData = noZoomPixel.data
-                noZoomImg[i][j] = "rgb(" + noZoomData[0] + ", " + noZoomData[1] +", " + noZoomData[2] + ", " +noZoomData[3] + ")"
-            }
-    }
-}
-
-let xOffsetDelta = 0
-let yOffsetDelta = 0
-
-function zoomIn(event, scale) {
-
-    if(scale >= 8) {
-        for(let i = 0; i < canvas.height; i++) {
-            for(let j = 0; j < canvas.width; j++) {  
-                //context.putImageData(noZoomImg[i][j], j, i)
-                context.fillStyle = noZoomImg[i][j]
-                context.fillRect(j, i, 1, 1)
-            }
-        }
-        return
-    }
-
-    let imgArr = new Array(canvas.height) //each mask element/pixel can have a value from 0 to 2 (0 mean its the color we are painting over)(1 means its a color we are not painting over)(2 means we already painted over this pixel)
-
-    var pixelData
-    var data
-
-    for(let i = 0; i < canvas.height; i++) {
-        imgArr[i] = []
-        for(let j = 0; j < canvas.width; j++) {
-            pixelData = context.getImageData(j, i, 1, 1)
-            data = pixelData.data
-            imgArr[i][j] = "rgb(" + data[0] + ", " + data[1] +", " + data[2] + ", " +data[3] + ")"
-        }
-    }
-
-    var xOffset = (event.clientX - canvas.offsetLeft)
-    var yOffset = (event.clientY - canvas.offsetTop)
-
-    xOffset -= Math.floor(canvas.width / 4)
-    yOffset -= Math.floor(canvas.height / 4)
-
-    console.log("center ? Top corner " + xOffset + " " + yOffset)
-
-    if(xOffset > canvas.width / 2)
-        xOffset = canvas.width / 2
-    else if(xOffset < 0)
-        xOffset = 0
-
-    if(yOffset > canvas.height / 2)
-        yOffset = canvas.height / 2
-    else if(yOffset < 0)
-        yOffset = 0
-
-    if(scale == 2)
-    {
-        xOffsetDelta += xOffset
-        yOffsetDelta += yOffset
-    }
-    else if(scale == 4)
-    {
-        xOffsetDelta += Math.floor(xOffset / 2)
-        yOffsetDelta += Math.floor(yOffset / 2)
-    }
-
-    console.log("offset " + xOffsetDelta + " " + yOffsetDelta)
-
-    for(let i = 0; i < canvas.height / 2; i++) {
-        for(let j = 0; j < canvas.width / 2; j++) {  
-            context.fillStyle = imgArr[i + yOffset][j + xOffset]
-            context.fillRect(j * 2, i * 2, 2, 2)
-        }
-    }
-}
-
-function pixelate(scale)
-{
-    if(scale <= 1)
-        return
-
-    let imgArr = new Array(canvas.height) //each mask element/pixel can have a value from 0 to 2 (0 mean its the color we are painting over)(1 means its a color we are not painting over)(2 means we already painted over this pixel)
-
-    var pixelData
-    var data
-
-    for(let i = 0; i < canvas.height; i++) {
-        imgArr[i] = []
-        for(let j = 0; j < canvas.width; j++) {
-            pixelData = context.getImageData(j, i, 1, 1)
-            data = pixelData.data
-            imgArr[i][j] = "rgb(" + data[0] + ", " + data[1] +", " + data[2] + ", " +data[3] + ")"
-        }
-    }
-
-    for(let i = 0; i < canvas.height; i+=scale) {
-        for(let j = 0; j < canvas.width; j+=scale) {  
-            context.fillStyle = imgArr[i][j]
-            context.fillRect(j , i, scale, scale)
-        }
-    }
-
-    for(let i = 0; i < canvas.height / scale; i++) {
-        for(let j = 0; j < canvas.width / scale; j++) {
-            noZoomImg[i + yOffsetDelta][j + xOffsetDelta] = imgArr[i * scale][j * scale]
-        }
-    }
-}
-
 //for mouse
 function startMouse(event) {
     switch (toolInUse) {
@@ -482,18 +367,10 @@ function startMouse(event) {
             break    
 
         case "zoom":
+            pixelate(scale)
             if(scale == 1)
                 setNoZoomImg()
-            scale *= 2
             zoomIn(event, scale)
-            if(scale >= 8)
-                {
-                    scale = 1
-                    xOffsetDelta = 0
-                    yOffsetDelta = 0
-                }
-
-            console.log(scale)
             break   
         
         default:
@@ -557,7 +434,6 @@ function stopMouse(event) {
 
                 addToHistory()
             }
-            pixelate(scale)
             break  
 
         case "bucket":
