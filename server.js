@@ -1,16 +1,16 @@
-const express = require('express');
+const express = require('express'); 
+const { join } = require('path'); // to join paths
 
-const app = express();
-app.use(express.json());
+const app = express(); // create application from express
+const port = 3000;
+const cwd = process.cwd(); // current working directory
 
-// visualise html
-app.get('/',function(req,res) 
-{
-    res.sendFile('F:/FMI 3ti kurs 2ri sem/webteh/project/WebTexProject_team3/public/mainPage.html');
-});
+const index = join(cwd, 'public', 'index.html'); // path to index.html
+// (file needs to be with the name "index.html")
 
-// visualise css (public\css) and js
-app.use(express.static('F:/FMI 3ti kurs 2ri sem/webteh/project/WebTexProject_team3/public' + '/'));
+app.use(express.json()); // middleware to parse json request body (req.body !== undefined)
+app.use(express.static('public')) // serve the static files
 
-app.listen(3003);
+app.listen(port); // choose on which port to listen
+
 
