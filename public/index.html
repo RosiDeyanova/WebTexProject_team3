@@ -14,6 +14,7 @@
         <script src="drawing logic.js"  defer type="module"></script>
         <script src="uploadPhoto.js"  defer type="module"></script>
         <script src="editPhoto.js"  defer type="module"></script>
+        <script src="downloadPhoto.js"  defer type="module"></script>
 
         <title>Paint</title>
 
@@ -227,31 +228,10 @@
                         </li>
         
                         <li class="tools-in-menu">
-                            <button onclick="download()" class="btn-tools items-more">
+                            <button class="btn-tools items-more" id='downloadPhotoButton' data-toggle="modal" data-target="#downloadPhoto">
                                 Download
-                            </button>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js">
-                            </script>
-                            <script>
-                                  function download() {
-                                        axios({
-                                              url: 'http://localhost:3000/',
-                                              method: 'GET',
-                                              responseType: 'blob'
-                                        })
-                                              .then((response) => {
-                                                    const url = window.URL
-                                                          .createObjectURL(new Blob([response.data]));
-                                                    const link = document.createElement('a');
-                                                    link.href = url;
-                                                    link.setAttribute('download', 'image.jpg');
-                                                    document.body.appendChild(link);
-                                                    link.click();
-                                                    document.body.removeChild(link);
-                                              })
-                                  }
-                      
-                            </script>
+                            </button>  
+
                         </li>
         
                         <li class="tools-in-menu">
@@ -272,6 +252,9 @@
         <div class="canvas-holder">
             <canvas id="canvas"></canvas>
         </div>
+
+
+
 
           <!-- dialog window for uploading photo -->
           <div class="modal fade" id="uploadPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
