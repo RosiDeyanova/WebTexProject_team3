@@ -1,6 +1,7 @@
 import {canvas} from './drawing logic.js'
-var button = document.getElementById('downloadPhotoButton')
+var button = document.getElementById('downloadPhotoButton') 
 
+//source - https://codepen.io/joseluisq/pen/jONezB
 function download(canvas, filename) {
     /// create an "off-screen" anchor tag
     var lnk = document.createElement('a'), e;
@@ -13,8 +14,7 @@ function download(canvas, filename) {
     /// pushed as "download" in HTML5 capable browsers
     lnk.href = canvas.toDataURL("image/png;base64");
 
-    console.log('ppt')
-
+   
     //create a "fake" click-event to trigger the download
   if (document.createEvent) {
     e = document.createEvent("MouseEvents");
