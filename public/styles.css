@@ -644,5 +644,7 @@
         .pictures
         {
             cursor: pointer;
+            width: 300px;
+            height: 225px;
         }
     }

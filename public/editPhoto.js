@@ -17,7 +17,7 @@ function bindClick(i)
 {
     return function()
     {
-        img.src = classPics[i].src; // url of new picture is the url of the clicked picture (style.backgroundImage)
+        img.src = classPics[i].src; // url of new picture is the url of the clicked picture (for uploaded - style.backgroundImage)
         img.onload = () => 
         {    
             context.drawImage(img, 0, 0); // put image on canvas with coordinates 0,0
