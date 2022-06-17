@@ -21,7 +21,6 @@
     <body>
         <header id="container-header">
             <div class="col brd">
-                
                 <div class="three-btns only-desktop">
                     <img class="desktop-icons" id="bucket-desktop" src="https://img.icons8.com/color/344/fill-color.png"
                                 alt="Bucket" width="1" height="60"> 
@@ -301,9 +300,23 @@
                   </button>
                 </div>
                 <div class="modal-body" id="album-pictures">
-                 <img src= "images.png" class="pictures" width="150" height="150">
-                 <img src= "свали.jpg"  class="pictures" width="150" height="150">
                 </div>
+                <script type="text/javascript">
+                   var album = document.getElementById("album-pictures");
+                   $.get('http://localhost:3000/getFromDb', function(response){
+                    console.log(response);
+                    response.image.forEach(element => {
+                        var newPic = document.createElement("div");
+                        newPic.classList.add("pictures");
+                        newPic.style.width = "300px";
+                        newPic.style.height = "225px";
+                        newPic.style.backgroundPosition = "center";
+                        newPic.style.backgroundSize = "cover";
+                        newPic.style.backgroundImage = `url(${element})`;
+                        album.appendChild(newPic);
+                    });
+                    });
+                 </script>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>

@@ -7,9 +7,12 @@ image_input.addEventListener("change", function()
   {
     // show picture in the rectangle
     const uploaded_image = reader.result;
+        $.post('http://localhost:3000/saveToDb', {
+            img: uploaded_image
+        });
     var url =  `url(${uploaded_image})`;
     document.getElementById("display-image").style.backgroundImage = url;
-
+    
     // add uploaded picture to album
     var newPic = document.createElement("div");
     newPic.classList.add("pictures");
@@ -23,4 +26,4 @@ image_input.addEventListener("change", function()
   
   reader.readAsDataURL(this.files[0]); //
 
-});
+})
